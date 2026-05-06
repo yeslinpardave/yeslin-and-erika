@@ -249,7 +249,7 @@
         rgba(30,20,10,.18) 0%,
         rgba(30,20,10,.12) 40%,
         rgba(30,20,10,.55) 100%),
-      url('img/DSC_3693.jpg') center 30%/cover no-repeat;
+      url('img/DSC_3692.jpg') 54% 30%/cover no-repeat;
   }
 
   /* Vignette suave + halo oscuro detrás del texto central */
@@ -618,6 +618,12 @@
   .historia-sign::before{
     content:'';flex:0 0 60px;height:1px;background:var(--gold-lt);
   }
+  /* Centrar tag, heading y divider en historia */
+  .historia-text .tag,
+  .historia-text .heading{
+    display:block;text-align:center;
+  }
+  .historia-text .floral-div{max-width:280px;margin-left:auto;margin-right:auto}
   @media(max-width:768px){
     #historia{grid-template-columns:1fr}
     .historia-img-wrap{max-width:340px;margin:0 auto}
@@ -1468,6 +1474,12 @@
     background:var(--gold-lt);
     flex-shrink:0;margin-top:.55rem;
   }
+  /* Beige note: keep both phrases together, wrap whole second part if needed */
+  .li-beige strong{white-space:nowrap}
+  .li-beige-note{white-space:nowrap;display:inline}
+  @media(max-width:480px){
+    .li-beige-note{display:block;margin-top:.15rem}
+  }
 
   /* Paleta de colores refinada */
   .dc-palette{
@@ -2228,8 +2240,19 @@
     letter-spacing:.02em;font-size:.92rem;margin:0;
   }
   .payment-details dd.big{
-    font-family:var(--display);font-style:italic;font-size:1.2rem;
-    letter-spacing:.04em;color:var(--text);
+    font-family:var(--sans);font-style:normal;font-weight:500;
+    font-size:1.2rem;letter-spacing:.03em;
+    font-variant-numeric:tabular-nums;
+    color:var(--text);
+    white-space:nowrap;
+  }
+  .payment-details dd.num{
+    font-family:var(--sans);font-style:normal;font-weight:400;
+    font-size:.92rem;letter-spacing:.02em;
+    font-variant-numeric:tabular-nums;
+    color:var(--text);
+    white-space:nowrap;
+    overflow-wrap:normal;
   }
   .payment-details dd.note{
     grid-column:1/-1;
@@ -2762,9 +2785,14 @@
     .payment-note{font-size:.95rem}
     .payment-method{font-size:.78rem;letter-spacing:.28em}
     .payment-details dt{font-size:.72rem;letter-spacing:.22em}
+    /* dl en una sola columna en mobile — los números largos tienen toda la card */
+    .payment-details dl{grid-template-columns:1fr;gap:.15rem 0}
+    .payment-details dt{margin-top:.7rem}
+    .payment-details dt:first-of-type{margin-top:0}
     .payment-details dd{font-size:1rem}
-    .payment-details dd.big{font-size:1.4rem}
-    .payment-details dd.note{font-size:.88rem}
+    .payment-details dd.big{font-size:1.3rem;letter-spacing:.04em}
+    .payment-details dd.num{font-size:.95rem;letter-spacing:.02em}
+    .payment-details dd.note{font-size:.88rem;margin-top:.6rem}
     .regalos-thanks-eyebrow{font-size:.78rem;letter-spacing:.35em}
     .regalos-thanks-title{font-size:1.65rem}
     .regalos-thanks-text{font-size:1.05rem}
@@ -3256,11 +3284,11 @@
   <div class="historia-img-wrap reveal reveal-l">
     <div class="historia-photo">
       <div class="historia-photo-label">Vuestra foto aquí</div>
-      <img src="img/pre7.jpeg" alt="Yeslin y Erika"
+      <img src="img/DSC_3728.jpg" alt="Yeslin y Erika"
            onerror="this.style.display='none'" />
     </div>
   </div>
-  <div>
+  <div class="historia-text">
     <span class="tag reveal d1">Nuestra historia</span>
     <h2 class="heading reveal d2">Nació en una cancha,<br>creció en el <em>corazón</em></h2>
     <div class="floral-div reveal d2"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
@@ -3330,8 +3358,8 @@
       <span class="mini-card-num">No. 01</span>
       <div class="mini-icon"><svg aria-hidden="true"><use href="#ic-clock"/></svg></div>
       <h3>El tiempo</h3>
-      <p class="mini-value">3:00 p.m.</p>
-      <p class="mini-desc">Llegada de los invitados<br>Ceremonia a las 4:00 p.m.</p>
+      <p class="mini-value">2:30 p.m.</p>
+      <p class="mini-desc">Llegada de los invitados<br>Ceremonia a las 3:00 p.m.</p>
     </article>
     <article class="mini-card">
       <span class="mini-card-num">No. 02</span>
@@ -3577,8 +3605,7 @@
     <!-- Banner principal del Dress Code -->
     <div class="dc-banner reveal d2">
       <span class="dc-banner-eyebrow">Dress Code</span>
-      <h3 class="dc-banner-title">Formal · Elegante de noche</h3>
-      <p class="dc-banner-sub">Black tie sugerido</p>
+      <h3 class="dc-banner-title">Formal · Elegante</h3>
     </div>
 
     <!-- Lookbook: Caballeros & Damas -->
@@ -3600,10 +3627,7 @@
           <p class="look-style">Traje formal a elección</p>
           <ul class="look-list">
             <li>Traje formal del color que prefieras</li>
-            <li>Camisa de color discreto</li>
-            <li>Corbata o pajarita en tonos sobrios</li>
-            <li>Zapatos de vestir formales</li>
-            <li><strong>Evitar el color beige</strong> — reservado para el novio</li>
+            <li class="li-beige"><strong>Evitar el color beige</strong><span class="li-beige-note"> &mdash; reservado para el novio</span></li>
           </ul>
         </div>
       </article>
@@ -3624,32 +3648,14 @@
           <p class="look-style">Vestido largo de gala</p>
           <ul class="look-list">
             <li>Vestido de noche, preferentemente largo</li>
-            <li>Telas fluidas, encajes o satén</li>
-            <li>Tonos suaves de la paleta sugerida</li>
-            <li>Tacones cómodos para la noche</li>
-            <li>Accesorios delicados y elegantes</li>
+            <li>Tacones cuadrados cómodos para el campo</li>
           </ul>
         </div>
       </article>
 
     </div>
 
-    <!-- Paleta de colores -->
-    <div class="dc-palette reveal d4">
-      <span class="dc-palette-eyebrow">Paleta sugerida</span>
-      <h3 class="dc-palette-h">Tonos tierra &amp; champán</h3>
-      <p class="dc-palette-sub">Colores que armonizan con el ambiente natural de la celebración</p>
-      <div class="dc-swatches">
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#f5ede0"></div><span class="dc-swatch-name">Crema</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#ede0c5"></div><span class="dc-swatch-name">Champán</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#d4b896"></div><span class="dc-swatch-name">Nude</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#c9a373"></div><span class="dc-swatch-name">Dorado</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#a8814d"></div><span class="dc-swatch-name">Caramelo</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#8b6f4e"></div><span class="dc-swatch-name">Marrón</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#c8c0b0"></div><span class="dc-swatch-name">Greige</span></div>
-        <div class="dc-swatch"><div class="dc-swatch-circle" style="background:#6e4a26"></div><span class="dc-swatch-name">Cacao</span></div>
-      </div>
-    </div>
+    
 
     <!-- Por favor evitar -->
     <div class="dc-avoid-block reveal d4">
@@ -3662,8 +3668,6 @@
       <div class="dc-avoid-chips">
         <span class="avoid-chip"><span class="avoid-dot" style="background:#ffffff;border:1px solid var(--mist)"></span>Blanco · novia</span>
         <span class="avoid-chip"><span class="avoid-dot" style="background:#d4b896"></span>Beige · novio</span>
-        <span class="avoid-chip"><span class="avoid-dot" style="background:#c44545"></span>Rojo brillante</span>
-        <span class="avoid-chip"><span class="avoid-dot" style="background:#e8c547"></span>Estampados llamativos</span>
       </div>
     </div>
 
@@ -3705,36 +3709,7 @@
       </div>
     </div>
 
-    <!-- Info card -->
-    <div class="ubi-info-card">
-      <span class="ubi-eyebrow">El destino</span>
-      <h3 class="ubi-place">Local La Luna</h3>
-      <p class="ubi-area">Las Pampas · Tomayquichua</p>
-      <p class="ubi-region">Huánuco · Perú</p>
-
-      <!-- Coordenadas decorativas -->
-      <div class="ubi-coords">
-        <div class="ubi-coords-icon">
-          <svg aria-hidden="true"><use href="#ic-compass"/></svg>
-        </div>
-        <div class="ubi-coords-text">
-          <span class="ubi-coords-label">Coordenadas</span>
-          <span class="ubi-coords-value">9°55'50"S · 76°14'32"W</span>
-        </div>
-      </div>
-
-      <!-- Botones de acción -->
-      <div class="ubi-actions">
-        <a class="btn-solid" href="https://maps.google.com/?q=Tomayquichua,Huanuco,Peru" target="_blank" rel="noopener">
-          <svg aria-hidden="true"><use href="#ic-pin"/></svg>
-          Abrir en Google Maps
-        </a>
-        <a class="btn-outline" href="https://www.waze.com/ul?q=Tomayquichua%20Huanuco%20Peru" target="_blank" rel="noopener">
-          <svg aria-hidden="true"><use href="#ic-route"/></svg>
-          Abrir en Waze
-        </a>
-      </div>
-    </div>
+    
   </div>
 
   <!-- Tips para llegar -->
@@ -3769,8 +3744,7 @@
       Confirma tu asistencia antes del <strong>1 de mayo de 2026</strong>.
       Será un honor tenerte con nosotros.
     </p>
-    <!-- TODO: Reemplazar YOUR_CODE_HERE por el endpoint real de Formspree (https://formspree.io) -->
-    <form class="rsvp-form" action="https://formspree.io/f/YOUR_CODE_HERE" method="POST" id="rsvp-form" novalidate>
+    <form class="rsvp-form" action="https://script.google.com/macros/s/AKfycbzM77FzWwONC01g-h787ye0c6jNc8II2R6GwrEbutrLJTY9HmlPSKL_0_m6SyYaX7CWaA/exec" method="POST" id="rsvp-form" novalidate>
       <div class="fg">
         <label for="nombre">Nombre completo *</label>
         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name"/>
@@ -3915,10 +3889,9 @@
         <span class="payment-method">Pago digital</span>
         <h4 class="payment-title">Yape</h4>
         <p class="payment-subtitle">Rápido y al instante</p>
-        <!-- TODO: Reemplazar +51 9XX XXX XXX por el número real de Yape -->
         <div class="payment-details">
           <dl>
-            <dt>Número</dt><dd class="big">+51 9XX XXX XXX</dd>
+            <dt>Número</dt><dd class="big">973 881 524</dd>
             <dt>Concepto</dt><dd>Regalo boda Y&amp;E</dd>
             <dd class="note">Yapea desde tu celular en segundos</dd>
           </dl>
@@ -3937,13 +3910,12 @@
         <span class="payment-method">Transferencia</span>
         <h4 class="payment-title">Banco</h4>
         <p class="payment-subtitle">Para transferencia directa</p>
-        <!-- TODO: Reemplazar con datos bancarios reales -->
         <div class="payment-details">
           <dl>
-            <dt>Titular</dt><dd>Yeslin &amp; Erika</dd>
-            <dt>Banco</dt><dd>[Banco aquí]</dd>
-            <dt>Cuenta</dt><dd class="big">000-000000-0-00</dd>
-            <dt>CCI</dt><dd>000-000-000000000000-00</dd>
+            <dt>Titular</dt><dd>Vivian Erika Lucas Japa</dd>
+            <dt>Banco</dt><dd>Interbank</dd>
+            <dt>Cuenta</dt><dd class="big">898-3163538212</dd>
+            <dt>CCI</dt><dd class="num">003-898-013163538212-43</dd>
             <dt>Concepto</dt><dd>Regalo boda Y&amp;E</dd>
           </dl>
         </div>
@@ -4141,14 +4113,14 @@ function downloadICS(){
 
 /* ─ COPIAR CUENTA ─ */
 function copyCuenta(){
-  const n='000-000000-0-00';
+  const n='8983163538212';
   (navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject())
     .then(()=>showToast('Cuenta copiada'))
     .catch(()=>showToast('Copia: '+n));
 }
 /* ─ COPIAR YAPE ─ */
 function copyYape(){
-  const n='+51 9XX XXX XXX';
+  const n='973881524';
   (navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject())
     .then(()=>showToast('Número copiado'))
     .catch(()=>showToast('Copia: '+n));
@@ -4161,9 +4133,36 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-/* ─ RSVP ─ */
-document.getElementById('rsvp-form').addEventListener('submit',function(e){
-  if(this.action.includes('YOUR_CODE_HERE')){e.preventDefault();showToast('Configura tu endpoint de Formspree ✉️')}
+/* ─ RSVP — envío al Google Apps Script ─ */
+document.getElementById('rsvp-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const form=this;
+  const btn=form.querySelector('button[type="submit"]');
+  const original=btn.textContent;
+
+  /* Validación mínima */
+  if(!form.nombre.value.trim()||!form.asistencia.value){
+    showToast('Completa tu nombre y asistencia');
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Enviando...';
+
+  try{
+    await fetch(form.action,{
+      method:'POST',
+      mode:'no-cors',
+      body:new FormData(form)
+    });
+    showToast('¡Gracias! Tu confirmación fue enviada');
+    form.reset();
+  }catch(err){
+    showToast('No se pudo enviar — intenta de nuevo');
+  }finally{
+    btn.disabled=false;
+    btn.textContent=original;
+  }
 });
 
 /* ─ MÚSICA DE FONDO + PORTADA ─ */
