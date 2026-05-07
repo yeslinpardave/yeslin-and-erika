@@ -1408,17 +1408,17 @@
   .look-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg);border-color:var(--gold-lt)}
 
   .look-img{
-    width:100%;aspect-ratio:3/4;
+    width:100%;aspect-ratio:5/8;
     overflow:hidden;
-    background:linear-gradient(135deg,var(--mist),var(--cream));
+    background:linear-gradient(135deg,var(--cream),var(--mist));
     position:relative;
   }
   .look-img img{
-    width:100%;height:100%;object-fit:cover;
+    width:100%;height:100%;object-fit:contain;
     transition:transform 1s var(--ease),filter .5s;
-    filter:saturate(.88) contrast(1.04);
+    filter:saturate(.95) contrast(1.02);
   }
-  .look-card:hover .look-img img{transform:scale(1.05);filter:saturate(.95) contrast(1.06)}
+  .look-card:hover .look-img img{transform:scale(1.04);filter:saturate(1) contrast(1.04)}
 
   /* Etiqueta "Inspiración" sobre la foto */
   .look-img-tag{
@@ -1561,7 +1561,7 @@
 
   @media(max-width:680px){
     .lookbook{grid-template-columns:1fr;gap:1.5rem;max-width:420px}
-    .look-img{aspect-ratio:4/5}
+    .look-img{aspect-ratio:5/8}
     .look-content{padding:1.8rem 1.4rem 2rem}
     .look-title{font-size:1.7rem}
     .look-list li{font-size:1rem}
@@ -3605,7 +3605,8 @@
     <!-- Banner principal del Dress Code -->
     <div class="dc-banner reveal d2">
       <span class="dc-banner-eyebrow">Dress Code</span>
-      <h3 class="dc-banner-title">Formal · Elegante</h3>
+      <h3 class="dc-banner-title">Semi-formal · Garden chic</h3>
+      <p class="dc-banner-sub">Elegancia relajada al aire libre</p>
     </div>
 
     <!-- Lookbook: Caballeros & Damas -->
@@ -3615,18 +3616,20 @@
       <article class="look-card">
         <div class="look-img">
           <span class="look-img-tag">Inspiración</span>
-          <!-- TODO: reemplazar por foto propia si se desea -->
-          <img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?w=800&q=80&auto=format&fit=crop"
-               alt="Inspiración traje formal caballeros"
+          <!-- TODO: si no carga, reemplazar por foto propia o cambiar la URL -->
+          <img src="img/inspiracionhombre.jpeg"
+               alt="Inspiración traje de lino para caballeros"
                loading="lazy"
-               onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#5c4530,#8b6f4e)'"/>
+               onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#a89070,#8b6f4e)'"/>
         </div>
         <div class="look-content">
           <span class="look-num">No. 01</span>
           <h4 class="look-title">Caballeros</h4>
-          <p class="look-style">Traje formal a elección</p>
+          <p class="look-style">Traje de lino o ligero</p>
           <ul class="look-list">
-            <li>Traje formal del color que prefieras</li>
+            <li>Tonos tierra, pastel u oscuros sobrios</li>
+            <li>Camisa de color discreto, opcional sin corbata</li>
+            <li>Zapatos cómodos para terreno al aire libre</li>
             <li class="li-beige"><strong>Evitar el color beige</strong><span class="li-beige-note"> &mdash; reservado para el novio</span></li>
           </ul>
         </div>
@@ -3636,19 +3639,21 @@
       <article class="look-card">
         <div class="look-img">
           <span class="look-img-tag">Inspiración</span>
-          <!-- TODO: reemplazar por foto propia si se desea -->
-          <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&q=80&auto=format&fit=crop"
-               alt="Inspiración vestido largo damas"
+          <!-- TODO: si no carga, reemplazar por foto propia o cambiar la URL -->
+          <img src="img/inspiracionmujer.jpeg"
+               alt="Inspiración vestido floral para damas"
                loading="lazy"
-               onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede0c5,#c9a373)'"/>
+               onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#ede0c5,#d4b896)'"/>
         </div>
         <div class="look-content">
           <span class="look-num">No. 02</span>
           <h4 class="look-title">Damas</h4>
-          <p class="look-style">Vestido largo de gala</p>
+          <p class="look-style">Vestido midi o largo, fluido</p>
           <ul class="look-list">
-            <li>Vestido de noche, preferentemente largo</li>
-            <li>Tacones cuadrados cómodos para el campo</li>
+            <li>Estampados florales o tonos pastel</li>
+            <li>Telas fluidas, románticas y ligeras</li>
+            <li>Tacón cuadrado o sandalia cómoda para el jardín</li>
+            <li>Accesorios delicados — perlas, dorados suaves</li>
           </ul>
         </div>
       </article>
@@ -3773,61 +3778,78 @@
   <p class="gallery-sub reveal d2">Pequeños instantes que nos trajeron hasta aquí, guardados para siempre</p>
 
   <div class="gallery-mosaic reveal d3" id="gallery">
-    <!-- Para añadir más fotos: copia un <article> y cambia src y data-src a la nueva imagen -->
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre1.jpeg">
-      <img class="gallery-img" src="img/DSC_3671.jpg" alt="" loading="lazy"/>
+    <!-- Galería curada: 16 fotos · 4 filas de 4 (desktop) -->
+    <!-- Para añadir más fotos: copia un <article> y cambia src y data-src -->
+
+    <!-- Fila 1: apertura -->
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre15.jpeg">
+      <img class="gallery-img" src="img/pre15.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre2.jpeg">
-      <img class="gallery-img" src="img/pre2.jpeg" alt="" loading="lazy"/>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3692.jpg">
+      <img class="gallery-img" src="img/DSC_3692.jpg" alt="" loading="lazy"/>
+      <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
+    </article>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/IMG-20190422-WA0049.jpg">
+      <img class="gallery-img" src="img/IMG-20190422-WA0049.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
     <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre3.jpeg">
       <img class="gallery-img" src="img/pre3.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre4.jpeg">
-      <img class="gallery-img" src="img/DSC_3693.jpg" alt="" loading="lazy"/>
+
+    <!-- Fila 2 -->
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3714.jpg">
+      <img class="gallery-img" src="img/DSC_3714.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre5.jpeg">
-      <img class="gallery-img" src="img/pre5.jpeg" alt="" loading="lazy"/>
-      <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
-    </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre6.jpeg">
-      <img class="gallery-img" src="img/pre6.jpeg" alt="" loading="lazy"/>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/IMG_4093.jpg">
+      <img class="gallery-img" src="img/IMG_4093.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
     <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre7.jpeg">
       <img class="gallery-img" src="img/pre7.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre8.jpeg">
-      <img class="gallery-img" src="img/pre8.jpeg" alt="" loading="lazy"/>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3728.jpg">
+      <img class="gallery-img" src="img/DSC_3728.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre9.jpeg">
-      <img class="gallery-img" src="img/pre9.jpeg" alt="" loading="lazy"/>
+
+    <!-- Fila 3 -->
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3738.jpg">
+      <img class="gallery-img" src="img/DSC_3738.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre10.jpeg">
-      <img class="gallery-img" src="img/DSC_3714.jpg" alt="" loading="lazy"/>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/IMG_9128.jpg">
+      <img class="gallery-img" src="img/IMG_9128.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
     <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre11.jpeg">
       <img class="gallery-img" src="img/pre11.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre12.jpeg">
-      <img class="gallery-img" src="img/pre12.jpeg" alt="" loading="lazy"/>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/156AD115-2ADC-45AD-BB4C-354D1BB5B02A.JPG.jpeg">
+      <img class="gallery-img" src="img/156AD115-2ADC-45AD-BB4C-354D1BB5B02A.JPG.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
-    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre13.jpeg">
-      <img class="gallery-img" src="img/pre13.jpeg" alt="" loading="lazy"/>
+
+    <!-- Fila 4: cierre -->
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3768.jpg">
+      <img class="gallery-img" src="img/DSC_3768.jpg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
     <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/pre14.jpeg">
       <img class="gallery-img" src="img/pre14.jpeg" alt="" loading="lazy"/>
+      <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
+    </article>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/DSC_3671.jpg">
+      <img class="gallery-img" src="img/DSC_3671.jpg" alt="" loading="lazy"/>
+      <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
+    </article>
+    <article class="gallery-item" tabindex="0" role="button" aria-label="Ampliar foto" data-src="img/IMG_9765.JPG.jpeg">
+      <img class="gallery-img" src="img/IMG_9765.JPG.jpeg" alt="" loading="lazy"/>
       <div class="gallery-zoom"><span class="gallery-zoom-btn" aria-hidden="true">+</span></div>
     </article>
   </div>
@@ -4096,6 +4118,42 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft')prevLb();
   if(e.key==='ArrowRight')nextLb();
 });
+
+/* ─ SWIPE en lightbox (mobile) ─ */
+(function(){
+  let startX=0,startY=0,deltaX=0,deltaY=0,swiping=false;
+  const TH=50; /* threshold mínimo de desplazamiento horizontal */
+
+  lb.addEventListener('touchstart',e=>{
+    if(!lb.classList.contains('open'))return;
+    const t=e.touches[0];
+    startX=t.clientX;startY=t.clientY;deltaX=0;deltaY=0;swiping=true;
+    lbImg.style.transition='none';
+  },{passive:true});
+
+  lb.addEventListener('touchmove',e=>{
+    if(!swiping)return;
+    const t=e.touches[0];
+    deltaX=t.clientX-startX;
+    deltaY=t.clientY-startY;
+    /* Si el gesto es más vertical que horizontal, no es swipe */
+    if(Math.abs(deltaY)>Math.abs(deltaX)){return}
+    /* Mover la imagen un poco siguiendo el dedo */
+    lbImg.style.transform=`translateX(${deltaX*.5}px) scale(1)`;
+    lbImg.style.opacity=Math.max(.4,1-Math.abs(deltaX)/600);
+  },{passive:true});
+
+  lb.addEventListener('touchend',()=>{
+    if(!swiping)return;
+    swiping=false;
+    lbImg.style.transition='';
+    lbImg.style.transform='';
+    lbImg.style.opacity='';
+    if(Math.abs(deltaX)>TH&&Math.abs(deltaX)>Math.abs(deltaY)){
+      if(deltaX<0)nextLb();else prevLb();
+    }
+  });
+})();
 
 /* ─ ICS ─ */
 function downloadICS(){
