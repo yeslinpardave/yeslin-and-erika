@@ -2627,6 +2627,38 @@
   }
 
   /* ═══════════════════════════════════════════
+     LANGUAGE TOGGLE
+  ═══════════════════════════════════════════ */
+  .nav-actions{
+    display:flex;align-items:center;gap:.7rem;
+    position:relative;z-index:302;
+  }
+  .lang-toggle{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.5rem .75rem;
+    border:1px solid var(--gold-lt);
+    background:rgba(248,241,227,.85);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    cursor:pointer;
+    font-family:var(--caps);font-size:.6rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gold-dk);
+    transition:all .3s var(--ease);
+  }
+  .lang-toggle:hover{background:var(--gold);color:var(--paper);border-color:var(--gold)}
+  .lang-toggle .lang-current{color:var(--gold-dk);font-weight:500}
+  .lang-toggle .lang-sep{opacity:.4;margin:0 .15rem}
+  .lang-toggle .lang-other{opacity:.55}
+  .lang-toggle:hover .lang-current,
+  .lang-toggle:hover .lang-other,
+  .lang-toggle:hover .lang-sep{color:var(--paper);opacity:1}
+
+  /* Mobile: lang toggle visible junto al hamburguesa */
+  @media(max-width:768px){
+    .lang-toggle{font-size:.7rem;letter-spacing:.22em;padding:.55rem .85rem}
+  }
+
+  /* ═══════════════════════════════════════════
      COVER — portada de invitación interactiva
   ═══════════════════════════════════════════ */
   body.cover-active{overflow:hidden}
@@ -3102,7 +3134,7 @@
 <body class="cover-active">
 
 <!-- Skip link para teclado / lectores de pantalla -->
-<a href="#hero" class="skip-link">Saltar al contenido</a>
+<a href="#hero" class="skip-link" data-i18n="skip_link">Saltar al contenido</a>
 
 <!-- ═══════════ PORTADA — invitación cerrada ═══════════ -->
 <div class="cover" id="cover" role="button" tabindex="0" aria-label="Abrir invitación">
@@ -3115,7 +3147,7 @@
 
   <div class="cover-inner">
     <div class="cover-frame">
-      <span class="cover-eyebrow">Save the Date</span>
+      <span class="cover-eyebrow" data-i18n="cover_eyebrow">Save the Date</span>
       <h1 class="cover-names">
         Yeslin <span class="amp">&amp;</span> Erika
       </h1>
@@ -3124,15 +3156,15 @@
         <span class="diamond"></span>
         <span class="line"></span>
       </div>
-      <p class="cover-date">20 · Junio · 2026</p>
-      <p class="cover-place">Nos casamos</p>
+      <p class="cover-date" data-i18n="cover_date">20 · Junio · 2026</p>
+      <p class="cover-place" data-i18n="cover_place">Nos casamos</p>
 
       <div class="cover-seal" aria-hidden="true">
         <span class="cover-seal-letters">Y&amp;E</span>
       </div>
 
       <p class="cover-cta">
-        Toca para abrir la invitación
+        <span data-i18n="cover_cta">Toca para abrir la invitación</span>
         <span class="cover-arrow">↓</span>
       </p>
     </div>
@@ -3439,19 +3471,26 @@
     <span>Y &amp; E</span>
     <span class="nav-logo-tag">20·06<br>2026</span>
   </a>
-  <button class="nav-tog" id="nav-tog" aria-label="Menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#historia"  onclick="closeNav()">Historia</a></li>
-    <li><a href="#detalles"  onclick="closeNav()">Detalles</a></li>
-    <li><a href="#cronograma" onclick="closeNav()">Cronograma</a></li>
-    <li><a href="#dresscode" onclick="closeNav()">Vestimenta</a></li>
-    <li><a href="#ubicacion" onclick="closeNav()">Ubicación</a></li>
-    <li><a href="#galeria"   onclick="closeNav()">Galería</a></li>
-    <li><a href="#regalos"   onclick="closeNav()">Regalos</a></li>
+    <li><a href="#historia"  onclick="closeNav()" data-i18n="nav_historia">Historia</a></li>
+    <li><a href="#detalles"  onclick="closeNav()" data-i18n="nav_detalles">Detalles</a></li>
+    <li><a href="#cronograma" onclick="closeNav()" data-i18n="nav_cronograma">Cronograma</a></li>
+    <li><a href="#dresscode" onclick="closeNav()" data-i18n="nav_vestimenta">Vestimenta</a></li>
+    <li><a href="#ubicacion" onclick="closeNav()" data-i18n="nav_ubicacion">Ubicación</a></li>
+    <li><a href="#galeria"   onclick="closeNav()" data-i18n="nav_galeria">Galería</a></li>
+    <li><a href="#regalos"   onclick="closeNav()" data-i18n="nav_regalos">Regalos</a></li>
     <li><a href="#rsvp"      onclick="closeNav()" class="nav-cta">RSVP</a></li>
   </ul>
+  <div class="nav-actions">
+    <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Cambiar idioma / Change language">
+      <span class="lang-current" id="lang-current">ES</span>
+      <span class="lang-sep">·</span>
+      <span class="lang-other" id="lang-other">EN</span>
+    </button>
+    <button class="nav-tog" id="nav-tog" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -3469,12 +3508,12 @@
 
   <div class="hero-frame" aria-hidden="true"></div>
 
-  <span class="hero-seal" aria-hidden="true">Save the Date</span>
-  <span class="hero-vlabel l" aria-hidden="true">Yeslin · Erika</span>
-  <span class="hero-vlabel r" aria-hidden="true">Save the Date · 2026</span>
+  <span class="hero-seal" aria-hidden="true" data-i18n="hero_seal">Save the Date</span>
+  <span class="hero-vlabel l" aria-hidden="true" data-i18n="hero_vlabel_l">Yeslin · Erika</span>
+  <span class="hero-vlabel r" aria-hidden="true" data-i18n="hero_vlabel_r">Save the Date · 2026</span>
 
   <div class="hero-content" id="hero-parallax">
-    <p class="hero-pre">Nos casamos</p>
+    <p class="hero-pre" data-i18n="hero_pre">Nos casamos</p>
 
     <h1 class="hero-names">
       Yeslin <span class="hero-amp">&amp;</span> Erika
@@ -3487,40 +3526,40 @@
     </div>
 
     <div class="hero-date-block">
-      <span class="hero-day-label">Sábado</span>
+      <span class="hero-day-label" data-i18n="hero_weekday">Sábado</span>
       <div class="hero-date">
-        <span class="month">Junio</span>
+        <span class="month" data-i18n="hero_month">Junio</span>
         <span class="day">20</span>
-        <span class="year">2026</span>
+        <span class="year" data-i18n="hero_year">2026</span>
       </div>
     </div>
 
     <div class="countdown" id="countdown" style="margin-top:2rem">
       <div class="cd-unit">
-        <span class="cd-number" id="cd-days">--</span><span class="cd-label">Días</span>
+        <span class="cd-number" id="cd-days">--</span><span class="cd-label" data-i18n="cd_days">Días</span>
       </div>
       <span class="cd-sep" aria-hidden="true"></span>
       <div class="cd-unit">
-        <span class="cd-number" id="cd-hours">--</span><span class="cd-label">Horas</span>
+        <span class="cd-number" id="cd-hours">--</span><span class="cd-label" data-i18n="cd_hours">Horas</span>
       </div>
       <span class="cd-sep" aria-hidden="true"></span>
       <div class="cd-unit">
-        <span class="cd-number" id="cd-mins">--</span><span class="cd-label">Minutos</span>
+        <span class="cd-number" id="cd-mins">--</span><span class="cd-label" data-i18n="cd_mins">Minutos</span>
       </div>
       <span class="cd-sep" aria-hidden="true"></span>
       <div class="cd-unit">
-        <span class="cd-number" id="cd-secs">--</span><span class="cd-label">Segundos</span>
+        <span class="cd-number" id="cd-secs">--</span><span class="cd-label" data-i18n="cd_secs">Segundos</span>
       </div>
     </div>
 
     <div class="hero-cta">
       <button class="btn-outline" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'})">
-        Confirmar asistencia
+        <span data-i18n="hero_btn_rsvp">Confirmar asistencia</span>
         <svg aria-hidden="true"><use href="#ic-arrow"/></svg>
       </button>
       <button class="btn-outline" onclick="downloadICS()">
         <svg aria-hidden="true"><use href="#ic-cal"/></svg>
-        Agendar
+        <span data-i18n="hero_btn_calendar">Agendar</span>
       </button>
     </div>
   </div>
@@ -3537,26 +3576,14 @@
     </div>
   </div>
   <div class="historia-text">
-    <span class="tag reveal d1">Nuestra historia</span>
-    <h2 class="heading reveal d2">Nació en una cancha,<br>creció en el <em>corazón</em></h2>
+    <span class="tag reveal d1" data-i18n="historia_tag">Nuestra historia</span>
+    <h2 class="heading reveal d2" data-i18n-html="historia_heading_html">Nació en una cancha,<br>creció en el <em>corazón</em></h2>
     <div class="floral-div reveal d2"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-    <blockquote class="historia-quote reveal d3">
+    <blockquote class="historia-quote reveal d3" data-i18n="historia_quote">
       A veces el amor entra corriendo, sin avisar, igual que un buen pase.
     </blockquote>
-    <p class="body-text reveal d3">
-      Nuestra historia comenzó en la universidad, en una cancha de básquet, entre partidos, conversaciones y momentos sencillos que poco a poco nos fueron uniendo.
-
-Sin buscarlo, empezamos a compartir más tiempo juntos y a descubrir en el otro una conexión especial. Entre risas, confidencias y una salida que jamás olvidaríamos, nació algo que fue creciendo de manera natural, sincera y hermosa.
-
-Lo que empezó como una amistad se convirtió en compañía, apoyo y amor.
-Con el tiempo entendimos que no era coincidencia encontrarnos, sino el inicio de una historia que Dios estaba escribiendo para nosotros.
-
-Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma tan simple se transforma en una promesa para toda la vida.
-    </p>
-    <br>
-    <p class="body-text reveal d4">
-       Hoy, años después, esa chispa que nació
-      en una cancha de básquet se convierte en promesa para toda la vida.
+    <p class="body-text reveal d3" data-i18n-html="historia_p1_html">
+      Nuestra historia comenzó en la universidad, en una cancha de básquet, entre partidos, conversaciones y momentos sencillos que poco a poco nos fueron uniendo.<br><br>Sin buscarlo, empezamos a compartir más tiempo juntos y a descubrir en el otro una conexión especial. Entre risas, confidencias y una salida que jamás olvidaríamos, nació algo que fue creciendo de manera natural, sincera y hermosa.<br><br>Lo que empezó como una amistad se convirtió en compañía, apoyo y amor. Con el tiempo entendimos que no era coincidencia encontrarnos, sino el inicio de una historia que Dios estaba escribiendo para nosotros.<br><br>Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma tan simple se transforma en una promesa para toda la vida.
     </p>
     <div class="historia-sign reveal d5" aria-hidden="true">Yeslin &amp; Erika</div>
   </div>
@@ -3566,10 +3593,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 <!-- ═══════════ DETALLES ═══════════ -->
 <section id="detalles">
   <div class="detalles-hdr">
-    <span class="tag reveal">Lo esencial · Detalles</span>
-    <h2 class="heading reveal d1">Una invitación al <em>amor</em></h2>
+    <span class="tag reveal" data-i18n="det_tag">Lo esencial · Detalles</span>
+    <h2 class="heading reveal d1" data-i18n-html="det_heading_html">Una invitación al <em>amor</em></h2>
     <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-    <p class="detalles-hdr-sub reveal d2">
+    <p class="detalles-hdr-sub reveal d2" data-i18n="det_sub">
       Cada detalle ha sido pensado con cariño para que este día sea inolvidable junto a ustedes.
     </p>
   </div>
@@ -3583,23 +3610,23 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
     <svg class="invitation-corner br" aria-hidden="true"><use href="#ornament-corner"/></svg>
 
     <div class="invitation-inner">
-      <span class="invitation-eyebrow">Save the Date</span>
-      <p class="invitation-intro">
+      <span class="invitation-eyebrow" data-i18n="inv_eyebrow">Save the Date</span>
+      <p class="invitation-intro" data-i18n="inv_intro">
         Con la bendición de nuestras familias y todo el amor del mundo,
         tenemos el honor de invitarles a celebrar nuestra unión.
       </p>
-      <span class="invitation-weekday">Sábado</span>
+      <span class="invitation-weekday" data-i18n="inv_weekday">Sábado</span>
       <div class="invitation-date">
-        <span class="month">Junio</span>
+        <span class="month" data-i18n="inv_month">Junio</span>
         <span class="day">20</span>
-        <span class="year">2026</span>
+        <span class="year" data-i18n="inv_year">2026</span>
       </div>
       <svg class="invitation-sprig" aria-hidden="true"><use href="#ornament-sprig"/></svg>
       <p class="invitation-loc">
-        <strong>Local La Luna</strong>
-        Las Pampas · Tomayquichua, Huánuco
+        <strong data-i18n="inv_loc_main">Local La Luna</strong>
+        <span data-i18n="inv_loc_sub">Las Pampas · Tomayquichua, Huánuco</span>
       </p>
-      <span class="invitation-time">a partir de las 2:30 p.m.</span>
+      <span class="invitation-time" data-i18n="inv_time">a partir de las 2:30 p.m.</span>
     </div>
   </article>
 
@@ -3608,31 +3635,31 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
     <article class="mini-card">
       <span class="mini-card-num">No. 01</span>
       <div class="mini-icon"><svg aria-hidden="true"><use href="#ic-clock"/></svg></div>
-      <h3>El tiempo</h3>
-      <p class="mini-value">2:30 p.m.</p>
-      <p class="mini-desc">Llegada de los invitados<br>Ceremonia a las 3:00 p.m.</p>
+      <h3 data-i18n="mini1_h">El tiempo</h3>
+      <p class="mini-value" data-i18n="mini1_v">2:30 p.m.</p>
+      <p class="mini-desc" data-i18n-html="mini1_d_html">Llegada de los invitados<br>Ceremonia a las 3:00 p.m.</p>
     </article>
     <article class="mini-card">
       <span class="mini-card-num">No. 02</span>
       <div class="mini-icon"><svg aria-hidden="true"><use href="#ic-pin"/></svg></div>
-      <h3>El lugar</h3>
-      <p class="mini-value">La Luna</p>
-      <p class="mini-desc">Las Pampas, Tomayquichua<br>Huánuco</p>
+      <h3 data-i18n="mini2_h">El lugar</h3>
+      <p class="mini-value" data-i18n="mini2_v">La Luna</p>
+      <p class="mini-desc" data-i18n-html="mini2_d_html">Las Pampas, Tomayquichua<br>Huánuco</p>
     </article>
     <article class="mini-card">
       <span class="mini-card-num">No. 03</span>
       <div class="mini-icon"><svg aria-hidden="true"><use href="#ic-mail"/></svg></div>
-      <h3>Confirmación</h3>
-      <p class="mini-value">1 de Junio</p>
-      <p class="mini-desc">Confirma tu presencia<br>antes de esta fecha</p>
+      <h3 data-i18n="mini3_h">Confirmación</h3>
+      <p class="mini-value" data-i18n="mini3_v">1 de Junio</p>
+      <p class="mini-desc" data-i18n-html="mini3_d_html">Confirma tu presencia<br>antes de esta fecha</p>
     </article>
   </div>
 
   <div class="detalles-bottom">
-    <p class="detalles-cita reveal">El amor no se mide en años, sino en momentos compartidos</p>
+    <p class="detalles-cita reveal" data-i18n="det_cita">El amor no se mide en años, sino en momentos compartidos</p>
     <button class="btn-outline" onclick="downloadICS()">
       <svg aria-hidden="true"><use href="#ic-cal"/></svg>
-      Agregar al calendario
+      <span data-i18n="btn_calendar">Agregar al calendario</span>
     </button>
   </div>
 </section>
@@ -3650,10 +3677,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 
   <div class="crono-inner">
     <div class="crono-header">
-      <span class="tag reveal">El gran día</span>
-      <h2 class="heading reveal d1">Programa de <em>la celebración</em></h2>
+      <span class="tag reveal" data-i18n="crono_tag">El gran día</span>
+      <h2 class="heading reveal d1" data-i18n-html="crono_heading_html">Programa de <em>la celebración</em></h2>
       <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-      <p class="crono-poem reveal d2">
+      <p class="crono-poem reveal d2" data-i18n-html="crono_poem_html">
         El amor se compone de pequeños momentos.<br>
         Estos son los nuestros, esperando ser vividos contigo.
       </p>
@@ -3667,9 +3694,9 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       </div>
       <div class="event-card">
         <div class="event-icon"><svg aria-hidden="true"><use href="#ic-flower"/></svg></div>
-        <h4 class="event-title">Llegada de los invitados</h4>
-        <p class="event-desc">Las puertas abren para recibir a nuestros seres queridos. Tómate tu tiempo para llegar con calma.</p>
-        <span class="event-tag">Recepción</span>
+        <h4 class="event-title" data-i18n="ev1_t">Llegada de los invitados</h4>
+        <p class="event-desc" data-i18n="ev1_d">Las puertas abren para recibir a nuestros seres queridos. Tómate tu tiempo para llegar con calma.</p>
+        <span class="event-tag" data-i18n="ev1_tag">Recepción</span>
       </div>
     </article>
 
@@ -3683,9 +3710,9 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       </div>
       <div class="event-card">
         <div class="event-icon"><svg aria-hidden="true"><use href="#ic-rings"/></svg></div>
-        <h4 class="event-title">Ceremonia religiosa</h4>
-        <p class="event-desc">El momento más esperado: nuestras vidas se unen ante Dios y quienes más amamos.</p>
-        <span class="event-tag">Ceremonia</span>
+        <h4 class="event-title" data-i18n="ev2_t">Ceremonia religiosa</h4>
+        <p class="event-desc" data-i18n="ev2_d">El momento más esperado: nuestras vidas se unen ante Dios y quienes más amamos.</p>
+        <span class="event-tag" data-i18n="ev2_tag">Ceremonia</span>
       </div>
     </article>
 
@@ -3699,9 +3726,9 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       </div>
       <div class="event-card">
         <div class="event-icon"><svg aria-hidden="true"><use href="#ic-camera"/></svg></div>
-        <h4 class="event-title">Sesión de fotos &amp; tiempo libre</h4>
-        <p class="event-desc">Los novios capturan recuerdos con su sesión de fotos, mientras los invitados disfrutan de un tiempo libre en el local.</p>
-        <span class="event-tag">Fotografía</span>
+        <h4 class="event-title" data-i18n="ev3_t">Sesión de fotos &amp; tiempo libre</h4>
+        <p class="event-desc" data-i18n="ev3_d">Los novios capturan recuerdos con su sesión de fotos, mientras los invitados disfrutan de un tiempo libre en el local.</p>
+        <span class="event-tag" data-i18n="ev3_tag">Fotografía</span>
       </div>
     </article>
 
@@ -3715,9 +3742,9 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       </div>
       <div class="event-card">
         <div class="event-icon"><svg aria-hidden="true"><use href="#ic-glass"/></svg></div>
-        <h4 class="event-title">Vuelta de los novios &amp; celebración</h4>
-        <p class="event-desc">Los novios regresan y comienza oficialmente la fiesta. Música, baile, brindis y los mejores momentos que recordarán para siempre.</p>
-        <span class="event-tag">Fiesta</span>
+        <h4 class="event-title" data-i18n="ev4_t">Vuelta de los novios &amp; celebración</h4>
+        <p class="event-desc" data-i18n="ev4_d">Los novios regresan y comienza oficialmente la fiesta. Música, baile, brindis y los mejores momentos que recordarán para siempre.</p>
+        <span class="event-tag" data-i18n="ev4_tag">Fiesta</span>
       </div>
     </article>
 
@@ -3741,10 +3768,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 
   <div class="crono-inner">
     <div class="crono-header">
-      <span class="tag reveal">Vestimenta</span>
-      <h2 class="heading reveal d1">Vístete de <em>elegancia</em></h2>
+      <span class="tag reveal" data-i18n="dc_tag">Vestimenta</span>
+      <h2 class="heading reveal d1" data-i18n-html="dc_heading_html">Vístete de <em>elegancia</em></h2>
       <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-      <p class="dc-poem reveal d2">
+      <p class="dc-poem reveal d2" data-i18n-html="dc_poem_html">
         Este día merece lo mejor de cada uno.<br>
         Tu mejor versión es nuestro mejor regalo.
       </p>
@@ -3752,9 +3779,9 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 
     <!-- Banner principal del Dress Code -->
     <div class="dc-banner reveal d2">
-      <span class="dc-banner-eyebrow">Dress Code</span>
-      <h3 class="dc-banner-title">Elegante casual</h3>
-      <p class="dc-banner-sub">Elegancia relajada al aire libre</p>
+      <span class="dc-banner-eyebrow" data-i18n="dc_banner_eyebrow">Dress Code</span>
+      <h3 class="dc-banner-title" data-i18n="dc_banner_title">Elegante casual</h3>
+      <p class="dc-banner-sub" data-i18n="dc_banner_sub">Elegancia relajada al aire libre</p>
     </div>
 
     <!-- Lookbook: Caballeros & Damas -->
@@ -3763,7 +3790,7 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       <!-- ─── CABALLEROS ─── -->
       <article class="look-card">
         <div class="look-img">
-          <span class="look-img-tag">Inspiración</span>
+          <span class="look-img-tag" data-i18n="look_inspiracion">Inspiración</span>
           <img src="img/inspiracionhombre.jpeg"
                alt="Inspiración traje de lino para caballeros"
                loading="lazy"
@@ -3771,11 +3798,11 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
         </div>
         <div class="look-content">
           <span class="look-num">No. 01</span>
-          <h4 class="look-title">Caballeros</h4>
-          <p class="look-style">Estilo elegante casual</p>
+          <h4 class="look-title" data-i18n="look1_h">Caballeros</h4>
+          <p class="look-style" data-i18n="look1_style">Estilo elegante casual</p>
           <ul class="look-list">
-            <li>Ven como te haga sentir bien, respetando el dress code</li>
-            <li>Zapatos cómodos para terreno al aire libre</li>
+            <li data-i18n="look1_li1">Ven como te haga sentir bien, respetando el dress code</li>
+            <li data-i18n="look1_li2">Zapatos cómodos para terreno al aire libre</li>
              </ul>
         </div>
       </article>
@@ -3783,7 +3810,7 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       <!-- ─── DAMAS ─── -->
       <article class="look-card">
         <div class="look-img">
-          <span class="look-img-tag">Inspiración</span>
+          <span class="look-img-tag" data-i18n="look_inspiracion">Inspiración</span>
           <img src="img/inspiracionmujer.jpeg"
                alt="Inspiración vestido floral para damas"
                loading="lazy"
@@ -3791,11 +3818,11 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
         </div>
         <div class="look-content">
           <span class="look-num">No. 02</span>
-          <h4 class="look-title">Damas</h4>
-          <p class="look-style">Estilo elegante casual</p>
+          <h4 class="look-title" data-i18n="look2_h">Damas</h4>
+          <p class="look-style" data-i18n="look2_style">Estilo elegante casual</p>
           <ul class="look-list">
-            <li>Tacón cuadrado o sandalia cómoda para el jardín</li>
-            <li>Abrigo para el frio y viento</li>
+            <li data-i18n="look2_li1">Tacón cuadrado o sandalia cómoda para el jardín</li>
+            <li data-i18n="look2_li2">Abrigo para el frio y viento</li>
           </ul>
         </div>
       </article>
@@ -3808,19 +3835,19 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
     <div class="dc-avoid-block reveal d4">
       <span class="dc-avoid-eyebrow">
         <svg aria-hidden="true"><use href="#ic-no"/></svg>
-        Por favor evitar
+        <span data-i18n="avoid_eyebrow">Por favor evitar</span>
       </span>
-      <h3 class="dc-avoid-h">Colores reservados</h3>
-      <p class="dc-avoid-desc">Queremos que todos brillen a nuestro lado — excepto los colores reservados para los novios.</p>
+      <h3 class="dc-avoid-h" data-i18n="avoid_h">Colores reservados</h3>
+      <p class="dc-avoid-desc" data-i18n="avoid_desc">Queremos que todos brillen a nuestro lado — excepto los colores reservados para los novios.</p>
       <div class="dc-avoid-chips">
-        <span class="avoid-chip"><span class="avoid-dot" style="background:#ffffff;border:1px solid var(--mist)"></span>Blanco · novia</span>
-        <span class="avoid-chip"><span class="avoid-dot" style="background:#d4b896"></span>Beige · novio</span>
+        <span class="avoid-chip"><span class="avoid-dot" style="background:#ffffff;border:1px solid var(--mist)"></span><span data-i18n="avoid_white">Blanco · novia</span></span>
+        <span class="avoid-chip"><span class="avoid-dot" style="background:#d4b896"></span><span data-i18n="avoid_beige">Beige · novio</span></span>
       </div>
     </div>
 
     <!-- Frase final elegante -->
-    <p class="reveal d4" style="text-align:center;margin-top:3rem;font-family:var(--display);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-md)">
-      &mdash;&nbsp;&nbsp;Tu presencia iluminará este día. Viste con el corazón.&nbsp;&nbsp;&mdash;
+    <p class="reveal d4" style="text-align:center;margin-top:3rem;font-family:var(--display);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-md)" data-i18n="dc_closing">
+      —  Tu presencia iluminará este día. Viste con el corazón.  —
     </p>
 
   </div>
@@ -3830,10 +3857,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 <section id="ubicacion">
   <!-- Header -->
   <div class="ubi-header">
-    <span class="tag reveal">Cómo llegar</span>
-    <h2 class="heading reveal d1">El lugar de <em>nuestra unión</em></h2>
+    <span class="tag reveal" data-i18n="ubi_tag">Cómo llegar</span>
+    <h2 class="heading reveal d1" data-i18n-html="ubi_heading_html">El lugar de <em>nuestra unión</em></h2>
     <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-    <p class="ubi-poem reveal d2">
+    <p class="ubi-poem reveal d2" data-i18n-html="ubi_poem_html">
       Un rincón de Huánuco donde el tiempo se detiene<br>
       y los corazones se encuentran
     </p>
@@ -3843,7 +3870,7 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
   <div class="ubi-main reveal d3">
     <!-- Mapa con marco ornamentado -->
     <div class="ubi-map-card">
-      <span class="ubi-map-tag">El Mapa</span>
+      <span class="ubi-map-tag" data-i18n="ubi_map_tag">El Mapa</span>
       <div class="ubi-map-frame">
         <svg class="ubi-map-corner tl" aria-hidden="true"><use href="#ornament-corner"/></svg>
         <svg class="ubi-map-corner tr" aria-hidden="true"><use href="#ornament-corner"/></svg>
@@ -3863,27 +3890,27 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
   <div class="ubi-tips reveal d4" style="grid-template-columns:1fr;max-width:380px">
     <article class="ubi-tip">
       <div class="ubi-tip-icon"><svg aria-hidden="true"><use href="#ic-clock"/></svg></div>
-      <h4>Tiempo</h4>
-      <p class="ubi-tip-value">30 min</p>
-      <p class="ubi-tip-desc">en auto desde la ciudad</p>
+      <h4 data-i18n="tip_time_h">Tiempo</h4>
+      <p class="ubi-tip-value" data-i18n="tip_time_v">30 min</p>
+      <p class="ubi-tip-desc" data-i18n="tip_time_d">en auto desde la ciudad</p>
     </article>
   </div>
 
   <!-- Cierre -->
   <div class="ubi-closing reveal">
-    <span class="ubi-closing-eyebrow">Con todo el amor</span>
-    <p class="ubi-closing-quote">Los esperamos con los brazos abiertos</p>
-    <span class="ubi-closing-sub">el 20 de junio en La Luna</span>
+    <span class="ubi-closing-eyebrow" data-i18n="ubi_close_eyebrow">Con todo el amor</span>
+    <p class="ubi-closing-quote" data-i18n="ubi_close_quote">Los esperamos con los brazos abiertos</p>
+    <span class="ubi-closing-sub" data-i18n="ubi_close_sub">el 20 de junio en La Luna</span>
   </div>
 </section>
 
 <!-- ═══════════ RSVP ═══════════ -->
 <section id="rsvp">
   <div class="rsvp-box reveal">
-    <span class="tag">Confirmación</span>
-    <h2 class="heading">¿Nos acompañas en<br>este <em>nuevo capítulo</em>?</h2>
+    <span class="tag" data-i18n="rsvp_tag">Confirmación</span>
+    <h2 class="heading" data-i18n-html="rsvp_heading_html">¿Nos acompañas en<br>este <em>nuevo capítulo</em>?</h2>
     <div class="floral-div"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-    <p class="body-text" style="margin:0 auto;text-align:center">
+    <p class="body-text" style="margin:0 auto;text-align:center" data-i18n-html="rsvp_intro_html">
       Confirma tu asistencia antes del <strong>1 de mayo de 2026</strong>.
       Será un honor tenerte con nosotros.
     </p>
@@ -3893,31 +3920,31 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
         <label>Si eres humano, deja este campo vacío<input type="text" name="website" tabindex="-1" autocomplete="off"/></label>
       </div>
       <div class="fg">
-        <label for="nombre">Nombre completo *</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name"/>
+        <label for="nombre" data-i18n="rsvp_label_name">Nombre completo *</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" data-i18n-placeholder="rsvp_placeholder_name" required autocomplete="name"/>
       </div>
       <div class="fg">
-        <label for="asistencia">¿Confirmas asistencia? *</label>
+        <label for="asistencia" data-i18n="rsvp_label_attend">¿Confirmas asistencia? *</label>
         <select id="asistencia" name="asistencia" required>
-          <option value="" disabled selected>Selecciona una opción</option>
-          <option value="si">Sí, con mucha alegría</option>
-          <option value="no">Lamentablemente no podré asistir</option>
+          <option value="" disabled selected data-i18n="rsvp_opt_default">Selecciona una opción</option>
+          <option value="si" data-i18n="rsvp_opt_yes">Sí, con mucha alegría</option>
+          <option value="no" data-i18n="rsvp_opt_no">Lamentablemente no podré asistir</option>
         </select>
       </div>
-      <button type="submit" class="btn-solid" style="justify-self:center;margin-top:.25rem">
+      <button type="submit" class="btn-solid" style="justify-self:center;margin-top:.25rem" data-i18n="rsvp_btn">
         Confirmar asistencia
       </button>
-      <p class="form-note">Tus datos se usarán únicamente para la organización de la boda.</p>
+      <p class="form-note" data-i18n="rsvp_note">Tus datos se usarán únicamente para la organización de la boda.</p>
     </form>
   </div>
 </section>
 
 <!-- ═══════════ GALERÍA ═══════════ -->
 <section id="galeria">
-  <span class="tag reveal">Galería</span>
-  <h2 class="heading reveal d1">Nuestra historia en <em>imágenes</em></h2>
+  <span class="tag reveal" data-i18n="gal_tag">Galería</span>
+  <h2 class="heading reveal d1" data-i18n-html="gal_heading_html">Nuestra historia en <em>imágenes</em></h2>
   <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-  <p class="gallery-sub reveal d2">Pequeños instantes que nos trajeron hasta aquí, guardados para siempre</p>
+  <p class="gallery-sub reveal d2" data-i18n="gal_sub">Pequeños instantes que nos trajeron hasta aquí, guardados para siempre</p>
 
   <div class="gallery-mosaic reveal d3" id="gallery">
     <!-- Galería curada: 16 fotos · 4 filas de 4 (desktop) -->
@@ -4004,7 +4031,7 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
   <img class="lb-img" id="lb-img" src="" alt=""/>
   <button class="lb-arr" id="lb-next" aria-label="Siguiente"></button>
   <span class="lb-counter" id="lb-counter"></span>
-  <div class="lb-swipe-hint" id="lb-swipe-hint" aria-hidden="true">Desliza</div>
+  <div class="lb-swipe-hint" id="lb-swipe-hint" aria-hidden="true" data-i18n="lb_swipe_hint">Desliza</div>
 </div>
 
 <!-- ═══════════ REGALOS ═══════════ -->
@@ -4019,10 +4046,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 
   <div class="crono-inner">
     <div class="crono-header">
-      <span class="tag reveal">Con amor</span>
-      <h2 class="heading reveal d1">Su presencia es<br>el mejor <em>regalo</em></h2>
+      <span class="tag reveal" data-i18n="reg_tag">Con amor</span>
+      <h2 class="heading reveal d1" data-i18n-html="reg_heading_html">Su presencia es<br>el mejor <em>regalo</em></h2>
       <div class="floral-div reveal d1"><span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="7" cy="7" r="2"/><circle cx="7" cy="7" r="5" stroke-dasharray="1.5 2"/></svg></span></div>
-      <p class="regalos-poem reveal d2">
+      <p class="regalos-poem reveal d2" data-i18n-html="reg_poem_html">
         Su sola compañía hace de este día algo inolvidable.<br>
         Para nosotros, eso ya lo es todo.
       </p>
@@ -4033,11 +4060,10 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       <div class="regalos-thanks-icon">
         <svg aria-hidden="true"><use href="#ic-gift"/></svg>
       </div>
-      <span class="regalos-thanks-eyebrow">Un detalle</span>
-      <h3 class="regalos-thanks-title">Si desean hacernos un regalo</h3>
-      <p class="regalos-thanks-text">
-         les dejamos a continuación
-        las opciones más sencillas para hacerlo.
+      <span class="regalos-thanks-eyebrow" data-i18n="thanks_eyebrow">Un detalle</span>
+      <h3 class="regalos-thanks-title" data-i18n="thanks_title">Si desean hacernos un regalo</h3>
+      <p class="regalos-thanks-text" data-i18n="thanks_text">
+         Les dejamos a continuación las opciones más sencillas para hacerlo.
       </p>
     </div>
 
@@ -4051,20 +4077,20 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
             <path d="M13 12l5 16 3-8 3 8 5-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <span class="payment-method">Pago digital</span>
-        <h4 class="payment-title">Yape</h4>
-        <p class="payment-subtitle">Rápido y al instante</p>
+        <span class="payment-method" data-i18n="pay_yape_method">Pago digital</span>
+        <h4 class="payment-title" data-i18n="pay_yape_title">Yape</h4>
+        <p class="payment-subtitle" data-i18n="pay_yape_sub">Rápido y al instante</p>
         <div class="payment-details">
           <dl>
-            <dt>Titular</dt><dd>Yeslin Pardave Bravo</dd>
-            <dt>Número</dt><dd class="big">973 881 524</dd>
-            <dt>Concepto</dt><dd>Regalo boda Y&amp;E</dd>
-            <dd class="note">Yapea desde tu celular en segundos</dd>
+            <dt data-i18n="pay_dt_holder">Titular</dt><dd>Yeslin Pardave Bravo</dd>
+            <dt data-i18n="pay_dt_number">Número</dt><dd class="big">973 881 524</dd>
+            <dt data-i18n="pay_dt_concept">Concepto</dt><dd data-i18n="pay_yape_concept">Regalo boda Y&amp;E</dd>
+            <dd class="note" data-i18n="pay_yape_note">Yapea desde tu celular en segundos</dd>
           </dl>
         </div>
         <button class="copy-btn" onclick="copyYape()">
           <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="13" height="13" rx="1"/><path d="M16 8V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3"/></svg>
-          Copiar número
+          <span data-i18n="btn_copy_yape">Copiar número</span>
         </button>
       </article>
 
@@ -4073,21 +4099,21 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
         <div class="payment-icon">
           <svg aria-hidden="true"><use href="#ic-bank"/></svg>
         </div>
-        <span class="payment-method">Transferencia</span>
-        <h4 class="payment-title">Banco</h4>
-        <p class="payment-subtitle">Para transferencia directa</p>
+        <span class="payment-method" data-i18n="pay_bank_method">Transferencia</span>
+        <h4 class="payment-title" data-i18n="pay_bank_title">Banco</h4>
+        <p class="payment-subtitle" data-i18n="pay_bank_sub">Para transferencia directa</p>
         <div class="payment-details">
           <dl>
-            <dt>Titular</dt><dd>Vivian Erika Lucas Japa</dd>
-            <dt>Banco</dt><dd>Interbank</dd>
-            <dt>Cuenta</dt><dd class="big">898-3163538212</dd>
-            <dt>CCI</dt><dd class="num">003-898-013163538212-43</dd>
-            <dt>Concepto</dt><dd>Regalo boda Y&amp;E</dd>
+            <dt data-i18n="pay_dt_holder">Titular</dt><dd>Vivian Erika Lucas Japa</dd>
+            <dt data-i18n="pay_dt_bank">Banco</dt><dd>Interbank</dd>
+            <dt data-i18n="pay_dt_account">Cuenta</dt><dd class="big">898-3163538212</dd>
+            <dt data-i18n="pay_dt_cci">CCI</dt><dd class="num">003-898-013163538212-43</dd>
+            <dt data-i18n="pay_dt_concept">Concepto</dt><dd data-i18n="pay_bank_concept">Regalo boda Y&amp;E</dd>
           </dl>
         </div>
         <button class="copy-btn" onclick="copyCuenta()">
           <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="13" height="13" rx="1"/><path d="M16 8V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3"/></svg>
-          Copiar cuenta
+          <span data-i18n="btn_copy_account">Copiar cuenta</span>
         </button>
       </article>
 
@@ -4096,21 +4122,21 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
     <!-- Ideas para tu regalo -->
     <div class="gift-ideas reveal d4">
       <div class="gift-ideas-header">
-        <span class="gift-ideas-eyebrow">Sugerencias</span>
-        <h3 class="gift-ideas-title">Ideas para tu regalo</h3>
-        <p class="gift-ideas-sub">Si prefieres algo concreto, aquí lo que nos encantaría para nuestra nueva vida juntos.</p>
+        <span class="gift-ideas-eyebrow" data-i18n="gift_eyebrow">Sugerencias</span>
+        <h3 class="gift-ideas-title" data-i18n="gift_title">Ideas para tu regalo</h3>
+        <p class="gift-ideas-sub" data-i18n="gift_sub">Si prefieres algo concreto, aquí lo que nos encantaría para nuestra nueva vida juntos.</p>
       </div>
       <ul class="gift-list">
-        <li><svg aria-hidden="true"><use href="#ic-plane"/></svg>Aportación para nuestra luna de miel</li>
-        <li><svg aria-hidden="true"><use href="#ic-home"/></svg>Aporte economico para nuestro nuevo hogar</li>
-        <li><svg aria-hidden="true"><use href="#ic-plate"/></svg>Una cena romántica para dos</li>
-        <li><svg aria-hidden="true"><use href="#ic-flower"/></svg>Una experiencia o aventura juntos</li>
+        <li><svg aria-hidden="true"><use href="#ic-plane"/></svg><span data-i18n="gift_li1">Aportación para nuestra luna de miel</span></li>
+        <li><svg aria-hidden="true"><use href="#ic-home"/></svg><span data-i18n="gift_li2">Aporte económico para nuestro nuevo hogar</span></li>
+        <li><svg aria-hidden="true"><use href="#ic-plate"/></svg><span data-i18n="gift_li3">Una cena romántica para dos</span></li>
+        <li><svg aria-hidden="true"><use href="#ic-flower"/></svg><span data-i18n="gift_li4">Una experiencia o aventura juntos</span></li>
       </ul>
     </div>
 
     <!-- Cierre -->
-    <p class="reveal d4" style="text-align:center;margin-top:3rem;font-family:var(--display);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-md);max-width:480px;margin-left:auto;margin-right:auto">
-      &mdash;&nbsp;&nbsp;Lo que más valoramos es compartir este día con ustedes.&nbsp;&nbsp;&mdash;
+    <p class="reveal d4" style="text-align:center;margin-top:3rem;font-family:var(--display);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-md);max-width:480px;margin-left:auto;margin-right:auto" data-i18n="reg_closing">
+      —  Lo que más valoramos es compartir este día con ustedes.  —
     </p>
   </div>
 </section>
@@ -4128,12 +4154,12 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
       <span class="foot-monogram-letters">Y<span class="foot-monogram-amp">&amp;</span>E</span>
     </div>
     <span class="foot-logo">Yeslin &amp; Erika</span>
-    <p class="foot-phrase">"Contigo, cada momento ordinario se convierte en un recuerdo extraordinario."</p>
-    <span class="foot-date">20 · Junio · 2026</span>
+    <p class="foot-phrase" data-i18n="foot_phrase">"Contigo, cada momento ordinario se convierte en un recuerdo extraordinario."</p>
+    <span class="foot-date" data-i18n="foot_date">20 · Junio · 2026</span>
     <div class="foot-divider" aria-hidden="true">
       <svg><use href="#orn-div"/></svg>
     </div>
-    <p class="foot-credit">Hecho con amor · 2026</p>
+    <p class="foot-credit" data-i18n="foot_credit">Hecho con amor · 2026</p>
   </div>
 </footer>
 
@@ -4146,9 +4172,399 @@ Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma
 <button class="music-toggle" id="music-toggle" aria-label="Reproducir/pausar música" aria-pressed="false">
   <svg id="music-icon" aria-hidden="true"><use href="#ic-music-off"/></svg>
 </button>
-<div class="music-hint" id="music-hint" aria-hidden="true">Toca para escuchar</div>
+<div class="music-hint" id="music-hint" aria-hidden="true" data-i18n="music_hint">Toca para escuchar</div>
 
 <script>
+/* ═══════════════════════════════════════════
+   I18N — Sistema bilingüe ES / EN
+═══════════════════════════════════════════ */
+const I18N={
+  es:{
+    /* Cover */
+    cover_eyebrow:'Save the Date',
+    cover_date:'20 · Junio · 2026',
+    cover_place:'Nos casamos',
+    cover_cta:'Toca para abrir la invitación',
+    /* Nav */
+    nav_historia:'Historia',
+    nav_detalles:'Detalles',
+    nav_cronograma:'Cronograma',
+    nav_vestimenta:'Vestimenta',
+    nav_ubicacion:'Ubicación',
+    nav_galeria:'Galería',
+    nav_regalos:'Regalos',
+    /* Hero */
+    hero_seal:'Save the Date',
+    hero_pre:'Nos casamos',
+    hero_weekday:'Sábado',
+    hero_month:'Junio',
+    hero_year:'2026',
+    hero_vlabel_l:'Yeslin · Erika',
+    hero_vlabel_r:'Save the Date · 2026',
+    hero_btn_rsvp:'Confirmar asistencia',
+    hero_btn_calendar:'Agendar',
+    cd_days:'Días',cd_hours:'Horas',cd_mins:'Minutos',cd_secs:'Segundos',
+    /* Historia */
+    historia_tag:'Nuestra historia',
+    historia_heading_html:'Nació en una cancha,<br>creció en el <em>corazón</em>',
+    historia_quote:'A veces el amor entra corriendo, sin avisar, igual que un buen pase.',
+    historia_p1_html:'Nuestra historia comenzó en la universidad, en una cancha de básquet, entre partidos, conversaciones y momentos sencillos que poco a poco nos fueron uniendo.<br><br>Sin buscarlo, empezamos a compartir más tiempo juntos y a descubrir en el otro una conexión especial. Entre risas, confidencias y una salida que jamás olvidaríamos, nació algo que fue creciendo de manera natural, sincera y hermosa.<br><br>Lo que empezó como una amistad se convirtió en compañía, apoyo y amor. Con el tiempo entendimos que no era coincidencia encontrarnos, sino el inicio de una historia que Dios estaba escribiendo para nosotros.<br><br>Hoy, después de tantos momentos compartidos, esa historia que comenzó de forma tan simple se transforma en una promesa para toda la vida.',
+    historia_p2:'Hoy, años después, esa chispa que nació en una cancha de básquet se convierte en promesa para toda la vida.',
+    /* Detalles */
+    det_tag:'Lo esencial · Detalles',
+    det_heading_html:'Una invitación al <em>amor</em>',
+    det_sub:'Cada detalle ha sido pensado con cariño para que este día sea inolvidable junto a ustedes.',
+    inv_eyebrow:'Save the Date',
+    inv_intro:'Con la bendición de nuestras familias y todo el amor del mundo, tenemos el honor de invitarles a celebrar nuestra unión.',
+    inv_weekday:'Sábado',
+    inv_month:'Junio',
+    inv_year:'2026',
+    inv_loc_main:'Local La Luna',
+    inv_loc_sub:'Las Pampas · Tomayquichua, Huánuco',
+    inv_time:'a partir de las 2:30 p.m.',
+    mini1_h:'El tiempo',mini1_v:'2:30 p.m.',mini1_d_html:'Llegada de los invitados<br>Ceremonia a las 3:00 p.m.',
+    mini2_h:'El lugar',mini2_v:'La Luna',mini2_d_html:'Las Pampas, Tomayquichua<br>Huánuco',
+    mini3_h:'Confirmación',mini3_v:'1 de Junio',mini3_d_html:'Confirma tu presencia<br>antes de esta fecha',
+    det_cita:'El amor no se mide en años, sino en momentos compartidos',
+    btn_calendar:'Agregar al calendario',
+    /* Cronograma */
+    crono_tag:'El gran día',
+    crono_heading_html:'Programa de <em>la celebración</em>',
+    crono_poem_html:'El amor se compone de pequeños momentos.<br>Estos son los nuestros, esperando ser vividos contigo.',
+    ev1_t:'Llegada de los invitados',
+    ev1_d:'Las puertas abren para recibir a nuestros seres queridos. Tómate tu tiempo para llegar con calma.',
+    ev1_tag:'Recepción',
+    ev2_t:'Ceremonia religiosa',
+    ev2_d:'El momento más esperado: nuestras vidas se unen ante Dios y quienes más amamos.',
+    ev2_tag:'Ceremonia',
+    ev3_t:'Sesión de fotos & tiempo libre',
+    ev3_d:'Los novios capturan recuerdos con su sesión de fotos, mientras los invitados disfrutan de un tiempo libre en el local.',
+    ev3_tag:'Fotografía',
+    ev4_t:'Vuelta de los novios & celebración',
+    ev4_d:'Los novios regresan y comienza oficialmente la fiesta. Música, baile, brindis y los mejores momentos que recordarán para siempre.',
+    ev4_tag:'Fiesta',
+    ev_period:'tarde',
+    /* Vestimenta */
+    dc_tag:'Vestimenta',
+    dc_heading_html:'Vístete de <em>elegancia</em>',
+    dc_poem_html:'Este día merece lo mejor de cada uno.<br>Tu mejor versión es nuestro mejor regalo.',
+    dc_banner_eyebrow:'Dress Code',
+    dc_banner_title:'Elegante casual',
+    dc_banner_sub:'Elegancia relajada al aire libre',
+    look_inspiracion:'Inspiración',
+    look1_h:'Caballeros',look1_style:'Estilo elegante casual',
+    look1_li1:'Ven como te haga sentir bien, respetando el dress code',
+    look1_li2:'Zapatos cómodos para terreno al aire libre',
+    look2_h:'Damas',look2_style:'Estilo elegante casual',
+    look2_li1:'Tacón cuadrado o sandalia cómoda para el jardín',
+    look2_li2:'Abrigo para el frío y el viento',
+    pal_eyebrow:'Paleta sugerida',
+    pal_h:'Tonos tierra & champán',
+    pal_sub:'Colores que armonizan con el ambiente natural de la celebración',
+    sw_crema:'Crema',sw_champan:'Champán',sw_nude:'Nude',sw_dorado:'Dorado',
+    sw_caramelo:'Caramelo',sw_marron:'Marrón',sw_greige:'Greige',sw_cacao:'Cacao',
+    avoid_eyebrow:'Por favor evitar',
+    avoid_h:'Colores reservados',
+    avoid_desc:'Queremos que todos brillen a nuestro lado — excepto los colores reservados para los novios.',
+    avoid_white:'Blanco · novia',
+    avoid_beige:'Beige · novio',
+    avoid_red:'Rojo brillante',
+    avoid_print:'Estampados llamativos',
+    dc_closing:'— Tu presencia iluminará este día. Viste con el corazón. —',
+    /* Ubicación */
+    ubi_tag:'Cómo llegar',
+    ubi_heading_html:'El lugar de <em>nuestra unión</em>',
+    ubi_poem_html:'Un rincón de Huánuco donde el tiempo se detiene<br>y los corazones se encuentran',
+    ubi_map_tag:'El Mapa',
+    ubi_eyebrow:'El destino',
+    ubi_place:'Local La Luna',
+    ubi_area:'Las Pampas · Tomayquichua',
+    ubi_region:'Huánuco · Perú',
+    btn_maps:'Abrir en Google Maps',
+    btn_waze:'Abrir en Waze',
+    tip_time_h:'Tiempo',
+    tip_time_v:'30 min',
+    tip_time_d:'en auto desde la ciudad',
+    ubi_close_eyebrow:'Con todo el amor',
+    ubi_close_quote:'Los esperamos con los brazos abiertos',
+    ubi_close_sub:'el 20 de junio en La Luna',
+    /* RSVP */
+    rsvp_tag:'Confirmación',
+    rsvp_heading_html:'¿Nos acompañas en<br>este <em>nuevo capítulo</em>?',
+    rsvp_intro_html:'Confirma tu asistencia antes del <strong>1 de mayo de 2026</strong>. Será un honor tenerte con nosotros.',
+    rsvp_label_name:'Nombre completo *',
+    rsvp_placeholder_name:'Tu nombre',
+    rsvp_label_attend:'¿Confirmas asistencia? *',
+    rsvp_opt_default:'Selecciona una opción',
+    rsvp_opt_yes:'Sí, con mucha alegría',
+    rsvp_opt_no:'Lamentablemente no podré asistir',
+    rsvp_btn:'Confirmar asistencia',
+    rsvp_note:'Tus datos se usarán únicamente para la organización de la boda.',
+    /* Galería */
+    gal_tag:'Galería',
+    gal_heading_html:'Nuestra historia en <em>imágenes</em>',
+    gal_sub:'Pequeños instantes que nos trajeron hasta aquí, guardados para siempre',
+    /* Regalos */
+    reg_tag:'Con amor',
+    reg_heading_html:'Su presencia es<br>el mejor <em>regalo</em>',
+    reg_poem_html:'Su sola compañía hace de este día algo inolvidable.<br>Para nosotros, eso ya lo es todo.',
+    thanks_eyebrow:'Un detalle',
+    thanks_title:'Si desean hacernos un regalo',
+    thanks_text:'Les dejamos a continuación las opciones más sencillas para hacerlo.',
+    pay_yape_method:'Pago digital',
+    pay_yape_title:'Yape',
+    pay_yape_sub:'Rápido y al instante',
+    pay_dt_holder:'Titular',
+    pay_dt_number:'Número',
+    pay_dt_concept:'Concepto',
+    pay_yape_concept:'Regalo boda Y&E',
+    pay_yape_note:'Yapea desde tu celular en segundos',
+    pay_bank_method:'Transferencia',
+    pay_bank_title:'Banco',
+    pay_bank_sub:'Para transferencia directa',
+    pay_dt_bank:'Banco',
+    pay_dt_account:'Cuenta',
+    pay_dt_cci:'CCI',
+    pay_bank_concept:'Regalo boda Y&E',
+    btn_copy_yape:'Copiar número',
+    btn_copy_account:'Copiar cuenta',
+    gift_eyebrow:'Sugerencias',
+    gift_title:'Ideas para tu regalo',
+    gift_sub:'Si prefieres algo concreto, aquí lo que nos encantaría para nuestra nueva vida juntos.',
+    gift_li1:'Aportación para nuestra luna de miel',
+    gift_li2:'Aporte económico para nuestro nuevo hogar',
+    gift_li3:'Una cena romántica para dos',
+    gift_li4:'Una experiencia o aventura juntos',
+    reg_closing:'— Lo que más valoramos es compartir este día con ustedes. —',
+    /* Footer */
+    foot_phrase:'"Contigo, cada momento ordinario se convierte en un recuerdo extraordinario."',
+    foot_date:'20 · Junio · 2026',
+    foot_credit:'Hecho con amor · 2026',
+    /* Música */
+    music_hint:'Toca para escuchar',
+    /* Toasts */
+    toast_event_saved:'Evento guardado en tu calendario',
+    toast_account_copied:'Cuenta copiada',
+    toast_number_copied:'Número copiado',
+    toast_rsvp_ok:'¡Gracias! Tu confirmación fue enviada',
+    toast_rsvp_err:'No se pudo enviar — intenta de nuevo',
+    toast_rsvp_complete:'Completa tu nombre y asistencia',
+    /* Lightbox */
+    lb_swipe_hint:'Desliza',
+    /* Today */
+    countdown_today:'— Hoy es el gran día —',
+    skip_link:'Saltar al contenido'
+  },
+  en:{
+    cover_eyebrow:'Save the Date',
+    cover_date:'June 20 · 2026',
+    cover_place:'We\'re getting married',
+    cover_cta:'Tap to open the invitation',
+    nav_historia:'Our Story',
+    nav_detalles:'Details',
+    nav_cronograma:'Schedule',
+    nav_vestimenta:'Dress Code',
+    nav_ubicacion:'Location',
+    nav_galeria:'Gallery',
+    nav_regalos:'Gifts',
+    hero_seal:'Save the Date',
+    hero_pre:'We\'re getting married',
+    hero_weekday:'Saturday',
+    hero_month:'June',
+    hero_year:'2026',
+    hero_vlabel_l:'Yeslin · Erika',
+    hero_vlabel_r:'Save the Date · 2026',
+    hero_btn_rsvp:'RSVP',
+    hero_btn_calendar:'Add to calendar',
+    cd_days:'Days',cd_hours:'Hours',cd_mins:'Minutes',cd_secs:'Seconds',
+    historia_tag:'Our Story',
+    historia_heading_html:'Born on a court,<br>grown in the <em>heart</em>',
+    historia_quote:'Sometimes love rushes in unannounced, like a perfect pass.',
+    historia_p1_html:'Our story began in college, on a basketball court, between games, conversations, and simple moments that slowly brought us together.<br><br>Without searching for it, we began spending more time with each other and discovering a special connection. Between laughs, confidences, and an outing we would never forget, something was born — growing naturally, sincerely, and beautifully.<br><br>What started as a friendship became companionship, support, and love. With time we understood that finding each other wasn\'t coincidence, but the beginning of a story God was writing for us.<br><br>Today, after so many shared moments, that story that began so simply becomes a promise for a lifetime.',
+    historia_p2:'Today, years later, that spark born on a basketball court becomes a promise for a lifetime.',
+    det_tag:'The essentials · Details',
+    det_heading_html:'An invitation to <em>love</em>',
+    det_sub:'Every detail has been thoughtfully prepared so this day is unforgettable alongside you.',
+    inv_eyebrow:'Save the Date',
+    inv_intro:'With our families\' blessing and all the love in the world, we have the honor of inviting you to celebrate our union.',
+    inv_weekday:'Saturday',
+    inv_month:'June',
+    inv_year:'2026',
+    inv_loc_main:'La Luna venue',
+    inv_loc_sub:'Las Pampas · Tomayquichua, Huánuco',
+    inv_time:'starting at 2:30 PM',
+    mini1_h:'Time',mini1_v:'2:30 PM',mini1_d_html:'Guest arrival<br>Ceremony at 3:00 PM',
+    mini2_h:'Venue',mini2_v:'La Luna',mini2_d_html:'Las Pampas, Tomayquichua<br>Huánuco',
+    mini3_h:'RSVP by',mini3_v:'June 1st',mini3_d_html:'Please confirm<br>before this date',
+    det_cita:'Love isn\'t measured in years, but in moments shared',
+    btn_calendar:'Add to calendar',
+    crono_tag:'The big day',
+    crono_heading_html:'Program of <em>the celebration</em>',
+    crono_poem_html:'Love is made of small moments.<br>These are ours, waiting to be lived with you.',
+    ev1_t:'Guest arrival',
+    ev1_d:'The doors open to welcome our loved ones. Take your time and arrive calmly.',
+    ev1_tag:'Welcome',
+    ev2_t:'Religious ceremony',
+    ev2_d:'The most awaited moment: our lives unite before God and those we love most.',
+    ev2_tag:'Ceremony',
+    ev3_t:'Photo session & free time',
+    ev3_d:'The couple captures memories with their photo session, while guests enjoy free time at the venue.',
+    ev3_tag:'Photography',
+    ev4_t:'Couple\'s return & celebration',
+    ev4_d:'The newlyweds return and the party officially begins. Music, dancing, toasts, and the best moments to remember forever.',
+    ev4_tag:'Reception',
+    ev_period:'afternoon',
+    dc_tag:'Dress Code',
+    dc_heading_html:'Dress with <em>elegance</em>',
+    dc_poem_html:'This day deserves the best from each of us.<br>Your best self is our best gift.',
+    dc_banner_eyebrow:'Dress Code',
+    dc_banner_title:'Elegant casual',
+    dc_banner_sub:'Relaxed elegance outdoors',
+    look_inspiracion:'Inspiration',
+    look1_h:'Gentlemen',look1_style:'Elegant casual style',
+    look1_li1:'Come as you feel best, respecting the dress code',
+    look1_li2:'Comfortable shoes for outdoor terrain',
+    look2_h:'Ladies',look2_style:'Elegant casual style',
+    look2_li1:'Block heel or comfortable sandal for the garden',
+    look2_li2:'A wrap or coat for the cold and wind',
+    pal_eyebrow:'Suggested palette',
+    pal_h:'Earth & champagne tones',
+    pal_sub:'Colors that harmonize with the natural setting of the celebration',
+    sw_crema:'Cream',sw_champan:'Champagne',sw_nude:'Nude',sw_dorado:'Gold',
+    sw_caramelo:'Caramel',sw_marron:'Brown',sw_greige:'Greige',sw_cacao:'Cocoa',
+    avoid_eyebrow:'Please avoid',
+    avoid_h:'Reserved colors',
+    avoid_desc:'We want everyone to shine alongside us — except for the colors reserved for the bride and groom.',
+    avoid_white:'White · bride',
+    avoid_beige:'Beige · groom',
+    avoid_red:'Bright red',
+    avoid_print:'Bold prints',
+    dc_closing:'— Your presence will light up this day. Dress with your heart. —',
+    ubi_tag:'How to get there',
+    ubi_heading_html:'The place of <em>our union</em>',
+    ubi_poem_html:'A corner of Huánuco where time stops<br>and hearts meet',
+    ubi_map_tag:'The Map',
+    ubi_eyebrow:'The destination',
+    ubi_place:'La Luna venue',
+    ubi_area:'Las Pampas · Tomayquichua',
+    ubi_region:'Huánuco · Perú',
+    btn_maps:'Open in Google Maps',
+    btn_waze:'Open in Waze',
+    tip_time_h:'Travel time',
+    tip_time_v:'30 min',
+    tip_time_d:'by car from the city',
+    ubi_close_eyebrow:'With all our love',
+    ubi_close_quote:'We await you with open arms',
+    ubi_close_sub:'on June 20 at La Luna',
+    rsvp_tag:'Confirmation',
+    rsvp_heading_html:'Will you join us<br>in this <em>new chapter</em>?',
+    rsvp_intro_html:'Please confirm your attendance before <strong>May 1, 2026</strong>. It will be an honor to have you with us.',
+    rsvp_label_name:'Full name *',
+    rsvp_placeholder_name:'Your name',
+    rsvp_label_attend:'Will you attend? *',
+    rsvp_opt_default:'Select an option',
+    rsvp_opt_yes:'Yes, with great joy',
+    rsvp_opt_no:'Sadly, I won\'t be able to attend',
+    rsvp_btn:'Confirm attendance',
+    rsvp_note:'Your data will only be used to organize the wedding.',
+    gal_tag:'Gallery',
+    gal_heading_html:'Our story in <em>images</em>',
+    gal_sub:'Small moments that brought us here, kept forever',
+    reg_tag:'With love',
+    reg_heading_html:'Your presence is<br>the best <em>gift</em>',
+    reg_poem_html:'Your company alone makes this day unforgettable.<br>For us, that is already everything.',
+    thanks_eyebrow:'A small note',
+    thanks_title:'If you wish to give us a gift',
+    thanks_text:'Below are the easiest ways to do so.',
+    pay_yape_method:'Digital payment',
+    pay_yape_title:'Yape',
+    pay_yape_sub:'Quick and instant',
+    pay_dt_holder:'Holder',
+    pay_dt_number:'Number',
+    pay_dt_concept:'Reference',
+    pay_yape_concept:'Wedding gift Y&E',
+    pay_yape_note:'Yape from your phone in seconds',
+    pay_bank_method:'Bank transfer',
+    pay_bank_title:'Bank',
+    pay_bank_sub:'For direct bank transfer',
+    pay_dt_bank:'Bank',
+    pay_dt_account:'Account',
+    pay_dt_cci:'CCI',
+    pay_bank_concept:'Wedding gift Y&E',
+    btn_copy_yape:'Copy number',
+    btn_copy_account:'Copy account',
+    gift_eyebrow:'Suggestions',
+    gift_title:'Gift ideas',
+    gift_sub:'If you prefer something specific, here is what we would love for our new life together.',
+    gift_li1:'Contribution to our honeymoon',
+    gift_li2:'Financial contribution toward our new home',
+    gift_li3:'A romantic dinner for two',
+    gift_li4:'An experience or adventure together',
+    reg_closing:'— What we treasure most is sharing this day with you. —',
+    foot_phrase:'"With you, every ordinary moment becomes an extraordinary memory."',
+    foot_date:'June 20 · 2026',
+    foot_credit:'Made with love · 2026',
+    music_hint:'Tap to listen',
+    toast_event_saved:'Event saved to your calendar',
+    toast_account_copied:'Account copied',
+    toast_number_copied:'Number copied',
+    toast_rsvp_ok:'Thank you! Your RSVP was sent',
+    toast_rsvp_err:'Couldn\'t send — please try again',
+    toast_rsvp_complete:'Please complete name and attendance',
+    lb_swipe_hint:'Swipe',
+    countdown_today:'— Today is the day —',
+    skip_link:'Skip to content'
+  }
+};
+
+let LANG=(localStorage.getItem('boda-lang')||(navigator.language||'es').slice(0,2)||'es').toLowerCase();
+if(LANG!=='en')LANG='es';
+
+function t(key){return (I18N[LANG]&&I18N[LANG][key])||(I18N.es[key])||key}
+
+function applyI18n(){
+  document.documentElement.lang=LANG;
+  /* Texto plano */
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;
+    if(I18N[LANG][k]!==undefined)el.textContent=I18N[LANG][k];
+  });
+  /* HTML (con tags em, br, strong) */
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const k=el.dataset.i18nHtml;
+    if(I18N[LANG][k]!==undefined)el.innerHTML=I18N[LANG][k];
+  });
+  /* Placeholder */
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const k=el.dataset.i18nPlaceholder;
+    if(I18N[LANG][k]!==undefined)el.placeholder=I18N[LANG][k];
+  });
+  /* Aria-label */
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+    const k=el.dataset.i18nAria;
+    if(I18N[LANG][k]!==undefined)el.setAttribute('aria-label',I18N[LANG][k]);
+  });
+  /* Toggle button */
+  const cur=document.getElementById('lang-current');
+  const oth=document.getElementById('lang-other');
+  if(cur&&oth){
+    cur.textContent=LANG.toUpperCase();
+    oth.textContent=LANG==='es'?'EN':'ES';
+  }
+}
+
+function setLang(l){
+  LANG=l==='en'?'en':'es';
+  try{localStorage.setItem('boda-lang',LANG)}catch(e){}
+  applyI18n();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  applyI18n();
+  const btn=document.getElementById('lang-toggle');
+  if(btn)btn.addEventListener('click',()=>setLang(LANG==='es'?'en':'es'));
+});
+
 /* ─ BARRA PROGRESO ─ */
 const pbar = document.getElementById('pbar');
 window.addEventListener('scroll',()=>{
@@ -4202,7 +4618,7 @@ window.addEventListener('scroll',()=>{
     const d=T-Date.now();
     if(d<=0){
       document.getElementById('countdown').innerHTML=
-        '<p style="font-family:var(--display);font-size:1.8rem;font-style:italic;color:var(--paper);letter-spacing:.05em;text-shadow:0 2px 8px rgba(42,31,18,.4)">— Hoy es el gran día —</p>';
+        '<p style="font-family:var(--display);font-size:1.8rem;font-style:italic;color:var(--paper);letter-spacing:.05em;text-shadow:0 2px 8px rgba(42,31,18,.4)">'+t('countdown_today')+'</p>';
       return;
     }
     document.getElementById('cd-days').textContent=pad(Math.floor(d/86400000));
@@ -4324,21 +4740,21 @@ function downloadICS(){
   const a=document.createElement('a');
   a.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(c);
   a.download='boda-yeslin-erika.ics';a.click();
-  showToast('Evento guardado en tu calendario ✓');
+  showToast(t('toast_event_saved'));
 }
 
 /* ─ COPIAR CUENTA ─ */
 function copyCuenta(){
   const n='8983163538212';
   (navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject())
-    .then(()=>showToast('Cuenta copiada'))
+    .then(()=>showToast(t('toast_account_copied')))
     .catch(()=>showToast('Copia: '+n));
 }
 /* ─ COPIAR YAPE ─ */
 function copyYape(){
   const n='973881524';
   (navigator.clipboard?navigator.clipboard.writeText(n):Promise.reject())
-    .then(()=>showToast('Número copiado'))
+    .then(()=>showToast(t('toast_number_copied')))
     .catch(()=>showToast('Copia: '+n));
 }
 
@@ -4364,12 +4780,12 @@ document.getElementById('rsvp-form').addEventListener('submit',async function(e)
 
   /* Validación mínima */
   if(!form.nombre.value.trim()||!form.asistencia.value){
-    showToast('Completa tu nombre y asistencia');
+    showToast(t('toast_rsvp_complete'));
     return;
   }
 
   btn.disabled=true;
-  btn.textContent='Enviando...';
+  btn.textContent=LANG==='en'?'Sending...':'Enviando...';
 
   try{
     await fetch(form.action,{
@@ -4377,10 +4793,10 @@ document.getElementById('rsvp-form').addEventListener('submit',async function(e)
       mode:'no-cors',
       body:new FormData(form)
     });
-    showToast('¡Gracias! Tu confirmación fue enviada');
+    showToast(t('toast_rsvp_ok'));
     form.reset();
   }catch(err){
-    showToast('No se pudo enviar — intenta de nuevo');
+    showToast(t('toast_rsvp_err'));
   }finally{
     btn.disabled=false;
     btn.textContent=original;
